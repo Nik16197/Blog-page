@@ -1,105 +1,107 @@
-import React, { useState } from 'react';
-import { alpha, AppBar, Avatar, Badge, InputBase, makeStyles, Toolbar, Typography } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
-import CancelIcon from '@material-ui/icons/Cancel';
+import {
+    alpha,
+    AppBar,
+    Avatar,
+    Badge,
+    InputBase,
+    makeStyles,
+    Toolbar,
+    Typography,
+} from "@material-ui/core";
+import { Cancel, Mail, Notifications, Search } from "@material-ui/icons";
+import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
-
     toolbar: {
         display: "flex",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
     },
     logoLg: {
         display: "none",
         [theme.breakpoints.up("sm")]: {
             display: "block",
-        }
+        },
     },
     logoSm: {
         display: "block",
         [theme.breakpoints.up("sm")]: {
-            display: "none"
-        }
+            display: "none",
+        },
     },
-
     search: {
         display: "flex",
         alignItems: "center",
         backgroundColor: alpha(theme.palette.common.white, 0.15),
-        '&:hover': {
+        "&:hover": {
             backgroundColor: alpha(theme.palette.common.white, 0.25),
         },
         borderRadius: theme.shape.borderRadius,
-        width: "70%",
+        width: "50%",
         [theme.breakpoints.down("sm")]: {
-            display: (props) => props.open ? "flex" : "none"
-        }
+            display: (props) => (props.open ? "flex" : "none"),
+            width: "70%",
+        },
     },
-    smSearchButton: {
+    input: {
+        color: "white",
+        marginLeft: theme.spacing(1),
+    },
+    cancel: {
+        [theme.breakpoints.up("sm")]: {
+            display: "none",
+        },
+    },
+    searchButton: {
         marginRight: theme.spacing(2),
         [theme.breakpoints.up("sm")]: {
-            display: "none"
-        }
+            display: "none",
+        },
     },
     icons: {
         alignItems: "center",
-        display: (props) => props.open ? "none" : "flex"
-
-
+        display: (props) => (props.open ? "none" : "flex"),
     },
     badge: {
         marginRight: theme.spacing(2),
     },
-    cancel: {
-        [theme.breakpoints.up("sm")]: {
-            display: "none"
-        }
-    }
-
 }));
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
     const classes = useStyles({ open });
-
     return (
-        <AppBar position='fixed'>
+        <AppBar position="fixed">
             <Toolbar className={classes.toolbar}>
-                <Typography variant='h6' className={classes.logoLg}>
-                    Shaaata
+                <Typography variant="h6" className={classes.logoLg}>
+                    Nikhil
                 </Typography>
-                <Typography variant='h6' className={classes.logoSm}>
-                    Tunne
+                <Typography variant="h6" className={classes.logoSm}>
+                    Nik
                 </Typography>
-
-                {/* Search bar */}
                 <div className={classes.search}>
-                    <SearchIcon />
-                    <InputBase placeholder='Search.....' />
-                    <CancelIcon className={classes.cancel} onClick={() => setOpen(false)} />
+                    <Search />
+                    <InputBase placeholder="Search..." className={classes.input} />
+                    <Cancel className={classes.cancel} onClick={() => setOpen(false)} />
                 </div>
-
-                {/* Icons Badge */}
                 <div className={classes.icons}>
-                    <SearchIcon className={classes.smSearchButton} onClick={() => setOpen(true)} />
-
-                    <Badge badgeContent={5} color="secondary" className={classes.badge}>
-                        <MailIcon />
+                    <Search
+                        className={classes.searchButton}
+                        onClick={() => setOpen(true)}
+                    />
+                    <Badge badgeContent={4} color="secondary" className={classes.badge}>
+                        <Mail />
                     </Badge>
-
-                    <Badge badgeContent={5} color="secondary" className={classes.badge}>
-                        <NotificationsActiveIcon />
+                    <Badge badgeContent={2} color="secondary" className={classes.badge}>
+                        <Notifications />
                     </Badge>
-                    <Avatar alt="Remy Sharp" src="https://picsum.photos/id/237/200/300" />
+                    <Avatar
+                        alt="Remy Sharp"
+                        src="https://images.pexels.com/photos/8647814/pexels-photo-8647814.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                    />
                 </div>
-                {/* Icons Badge */}
-
-                {/* Search bar */}
             </Toolbar>
-        </AppBar >
-    )
-}
+        </AppBar>
+    );
+};
 
 export default Navbar;
